@@ -1,0 +1,4 @@
+﻿venv
+__pycache__
+.idea
+air_con_db.csv
