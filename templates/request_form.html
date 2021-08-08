@@ -2,27 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Qurey2</title>
+    <title>Qurey Page</title>
 </head>
 <body>
 <h1>Broadway Air-Con Query</h1>
 
 <form method="post" action="/">
     <label for="type">Air-Conditioner Type:</label><br>
-    <input type="text" id="type" name="Air-Conditioner Type"><br>
+    <input type="text" id="type" name="Air-Con Type", value="{{ac_type}}"><br>
     <br>
     <label for="brand">Brand Name:</label><br>
-    <input type="text" id="brand" name="Brand Name"><br>
+    <input type="text" id="brand" name="Brand Name" value="{{brand}}"><br>
     <br>
     <label for="budget">Budget:</label><br>
-    <input type="text" id="budget" name="Budget"><br>
+    <input type="text" id="budget" name="Budget" value="{{budget}}"><br>
     <br>
     <label for="hp">Horse Power:</label><br>
-    <input type="text" id="hp" name="Horse Power"><br>
+    <input type="text" id="hp" name="Horse Power" value="{{hp}}"><br>
     <br>
     <button type="submit">Submit</button>
 </form>
-
+<br>
 {{message}}
 </body>
 </html>

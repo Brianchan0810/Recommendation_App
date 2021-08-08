@@ -14,12 +14,16 @@ grid = soup.select_one("ol.products.list.items.product-items")
 air_con = grid.select('li')
 len(air_con)
 
+#--------------test--------------------#
+
 air_con_link = []
 for i in air_con:
     link = i.select_one('a')['href']
     air_con_link.append(link)
 
 print(air_con_link)
+
+#--------------test--------------------#
 
 page = 1
 air_con_links = []
@@ -39,13 +43,14 @@ while True:
             break
         page +=1
 
+#--------------test--------------------#
 
 print(air_con_links)
 url1 = air_con_links[0]
 source1 = requests.get(url1)
 soup1 = BeautifulSoup(source1.text, 'html.parser')
 
-status = soup.select_one('.product-info-stock-sku').text.strip()
+status = soup1.select_one('.product-info-stock-sku').text.strip()
 
 name = soup1.select_one('.page-title').text.strip()
 print(name)
@@ -59,24 +64,26 @@ ac_type = find_type.search('MS-22CRFB 2.5HP Inverter Split-type Air-conditioner'
 print(ac_type)
 
 
-price = soup.select_one('.normal-price span.price').text
+price = soup1.select_one('.normal-price span.price').text
 
-cover_area = soup.select_one('tbody [data-th="Suggest Coverage area"]').text.split('-')
-print(cover_area)
+#cover_area = soup.select_one('tbody [data-th="Suggest Coverage area"]').text.split('-')
+#print(cover_area)
 
-brand = soup.select_one('tbody [data-th="Brand"]').text
+brand = soup1.select_one('tbody [data-th="Brand"]').text
 
 main_feature = []
-feature1 = soup.select_one('tbody [data-th="Brand"]').text
+feature1 = soup1.select_one('tbody [data-th="Brand"]').text
 main_feature.append(feature1)
 feature_no =2
 while True:
     try:
-        feature = soup.select_one(f'tbody [data-th="Main Feature {feature_no}"]').text
+        feature = soup1.select_one(f'tbody [data-th="Main Feature {feature_no}"]').text
         main_feature.append(feature)
         feature_no += 1
     except:
         break
+
+#--------------test--------------------#
 
 air_con_dataset = []
 ac_no = 1
@@ -123,37 +130,16 @@ for link in air_con_links:
             feature_no += 1
         except:
             break
-    air_con_dataset.append([name,status,hp,ac_type,price,brand,main_feature])
+    air_con_dataset.append([name,status,hp,ac_type,price,brand,main_feature,url])
     print(f'AC no.{ac_no}')
     ac_no += 1
 
 
 print(air_con_dataset)
 
-df = pd.DataFrame(air_con_dataset, columns=['name','status','hp','ac_type','price','brand','main_feature'])
+df = pd.DataFrame(air_con_dataset, columns=['name','status','hp','ac_type','price','brand','main_feature','link'])
 df['hp'].replace('3/4','0.75',inplace=True)
-df.to_csv('air_con_db.csv')
-
-df['ac_type'].shape[0]
-df['price'] = df['price'].astype('float')
-
-def test(df,type,brand,budget,hp):
-    df['price'] = df['price'].astype('float')
-    df['hp'] = df['hp'].astype('float')
-    if df[df['brand']==brand].shape[0] == 0:
-        message = 'No that brand'
-        return message
-    if df[df['type']==type].shape[0] == 0:
-        message = 'No that type'
-        return message
-    filtered_df = df[(df['hp']==hp) & (df['ac_type']==type) & (df['brand']==brand) & (df['price']<budget)]
-    brand_name = filtered_df['name'][0]
-    price = filtered_df['price'][0]
-    message = brand_name + ': price is HK$' + price
-    return message
-
-test(df,'Window','York',5000,1)
-df['name']
+df.to_csv('air_con_db.csv',index=False)
 
 
 
