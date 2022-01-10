@@ -24,5 +24,35 @@
 </form>
 <br>
 {{message}}
+
+{% for table in tables %}
+<table>
+    <tr>
+        <td>Names:</td>
+        <td>{{table['name']}}</td>
+    </tr>
+    <tr>
+        <td>Types:</td>
+        <td>{{table['ac_type']}}</td>
+    </tr>
+    <tr>
+        <td>Brand:</td>
+        <td>{{table['brand']}}</td>
+    </tr>
+    <tr>
+        <td>Price:</td>
+        <td>{{table['price']}}</td>
+    </tr>
+    <tr>
+        <td>Horse Power:</td>
+        <td>{{table['hp']}}</td>
+    </tr>
+    <tr>
+        <td>Link:</td>
+        <td><a href={{table['link']}}>learn more</a></td>
+    </tr>
+</table>
+<br>
+{% endfor %}
 </body>
 </html>

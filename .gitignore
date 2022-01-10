@@ -2,3 +2,8 @@
 __pycache__
 .idea
 air_con_db.csv
+*.csv
+log.txt
+credentials.json
+to_bigquery.py
+newtxt.txt
