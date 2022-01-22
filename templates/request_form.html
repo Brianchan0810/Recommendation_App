@@ -8,48 +8,62 @@
 <h1>Broadway Air-Con Query</h1>
 
 <form method="post" action="/">
-    <label for="type">Air-Conditioner Type:</label><br>
-    <input type="text" id="type" name="Air-Con Type", value="{{ac_type}}"><br>
-    <br>
-    <label for="brand">Brand Name:</label><br>
-    <input type="text" id="brand" name="Brand Name" value="{{brand}}"><br>
-    <br>
+
+    <label>Air-Conditioner Type:</label><br>
+    <input type="radio" id="type_all" name="ac_type" value="All" checked>
+    <label for="type_all">All</label>
+    {% for type_item in ["Window", "Split"] %}
+    <input type="radio" id={{type_item}} name="ac_type" value={{type_item}}>
+    <label for={{type_item}}>{{type_item}}</label>
+    {% endfor %}
+    <br><br>
+
+    <label>Brand Name:</label><br>
+    <select id="brand_name" name="brand_name">
+        {% for brand_item in brand_list %}
+        <option value={{brand_item}}>{{brand_item}}</option>
+        {% endfor %}
+    </select><br><br>
+
     <label for="budget">Budget:</label><br>
-    <input type="text" id="budget" name="Budget" value="{{budget}}"><br>
-    <br>
-    <label for="hp">Horse Power:</label><br>
-    <input type="text" id="hp" name="Horse Power" value="{{hp}}"><br>
-    <br>
+    <input type="text" id="budget" name="budget" value="{{budget}}">
+    <br><br>
+
+    <label>Horse Power:</label><br>
+    <input type="radio" id="hp_all" name="hp" value="All" checked>
+    <label for="hp_all">All</label>
+    {% for hp_item in ["3/4", "1", "1.5", "2", "2.5"] %}
+    <input type="radio" id={{hp_item}} name="hp" value={{hp_item}}>
+    <label for={{hp_item}}>{{hp_item}}</label>
+    {% endfor %}
+    <br><br>
+
     <button type="submit">Submit</button>
 </form>
 <br>
 {{message}}
 
-{% for table in tables %}
+{% for suggestion in suggestions %}
 <table>
     <tr>
-        <td>Names:</td>
-        <td>{{table['name']}}</td>
+        <td>Broadway Code:</td>
+        <td>{{suggestion['broadway_code']}}</td>
     </tr>
     <tr>
         <td>Types:</td>
-        <td>{{table['ac_type']}}</td>
+        <td>{{suggestion['ac_type']}}</td>
     </tr>
     <tr>
-        <td>Brand:</td>
-        <td>{{table['brand']}}</td>
+        <td>Brand Name:</td>
+        <td>{{suggestion['brand_name']}}</td>
     </tr>
     <tr>
         <td>Price:</td>
-        <td>{{table['price']}}</td>
-    </tr>
-    <tr>
-        <td>Horse Power:</td>
-        <td>{{table['hp']}}</td>
+        <td>{{suggestion['price']}}</td>
     </tr>
     <tr>
         <td>Link:</td>
-        <td><a href={{table['link']}}>learn more</a></td>
+        <td><a href={{suggestion['url']}}>learn more</a></td>
     </tr>
 </table>
 <br>
