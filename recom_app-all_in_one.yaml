@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: recom_app-deployment
+  name: recom-app-deployment
   labels:
-    app: recom_app
+    app: recom-app
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: recom_app
+      app: recom-app
   template:
     metadata:
       labels:
-        app: recom_app
+        app: recom-app
     spec:
       containers:
-      - name: my_flask
+      - name: my-flask
         image: brianrepo/myflask:ver2.1
         ports:
         - containerPort: 5000
@@ -25,11 +25,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: recom_app-service
+  name: recom-app-service
 spec:
   type: LoadBalancer
   selector:
-    app: recom_app
+    app: recom-app
   ports:
     - protocol: TCP
       port: 5000
