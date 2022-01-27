@@ -4,7 +4,7 @@ import pandas as pd
 import redis
 import pymysql
 
-r = redis.Redis('18.216.168.246', port=6379, password='user', decode_responses=True)
+r = redis.Redis('my-redis', decode_responses=True)
 
 app = Flask(__name__)
 
